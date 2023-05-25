@@ -1,0 +1,60 @@
+<html lang="en">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/css-toggle-switch@latest/dist/toggle-switch.css"/>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8">
+    <title>Stenhammargatan 3</title>
+</head>
+
+<body>
+<script>
+    function switcher(evt) {
+        console.log(evt.checked)
+    }
+
+    function openAccordion(id) {
+        let x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>
+
+
+<div class="w3-container w3-cell-row w3-teal">
+    <h1>Lisa & Johan</h1>
+</div>
+
+<div class="w3-container w3-margin">
+    <button onclick="openAccordion('living-room')"
+            class="w3-btn w3-block w3-gray w3-left-align w3-round-xlarge w3-text-white">Vardagsrum
+    </button>
+    <div id="living-room" class="w3-container w3-hide">
+        <div class="w3-cell-row w3-margin">
+            <div class="w3-cell w3-cell-middle">TV-belysning</div>
+            <div class="w3-cell w3-cell-middle">
+
+                <label class="switch-light switch-candy">
+                    <input type="checkbox" onchange="switcher(this)">
+                    <span>
+                        <span>Off</span>
+                        <span>On</span>
+                        <a></a>
+                      </span>
+                </label>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
