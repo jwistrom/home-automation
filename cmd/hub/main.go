@@ -7,10 +7,15 @@ import (
 )
 
 var htmlTemplate *template.Template
+var am *AccessoriesManager
 
 func main() {
+	am = NewAccessoriesManager()
 	loadTemplate()
+
 	http.HandleFunc("/", handleRoot)
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	registerTvBackgroundLightRouter("/tvbackgroundlight")
 
 	log.Println("Serving on port 8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
@@ -25,9 +30,15 @@ func loadTemplate() {
 }
 
 func handleRoot(w http.ResponseWriter, req *http.Request) {
-	err := htmlTemplate.Execute(w, nil)
+	err := htmlTemplate.Execute(w, map[string]interface{}(am.getStatusOfAllAccessories()))
 	if err != nil {
 		log.Printf("Template render error: %s", err)
 		http.Error(w, err.Error(), 500)
 	}
+}
+
+func registerTvBackgroundLightRouter(prefix string) {
+	router := &TvBackgroundLightRouter{am.tvBackgroundLight}
+	http.HandleFunc(prefix+"/state", router.HandleState)
+	http.HandleFunc(prefix+"/mode", router.HandleMode)
 }

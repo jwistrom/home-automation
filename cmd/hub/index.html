@@ -1,32 +1,23 @@
 <html lang="en">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/css-toggle-switch@latest/dist/toggle-switch.css"/>
-
-
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/npm/css-toggle-switch@latest/dist/toggle-switch.css"/>
+<!-- https://ghinda.net/css-toggle-switch/ -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="static/ui.js" type="text/javascript"></script>
+<script src="static/backend.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    axios.defaults.baseURL = "http://localhost:8080"
+</script>
 <head>
     <meta charset="UTF-8">
     <title>Stenhammargatan 3</title>
 </head>
 
 <body>
-<script>
-    function switcher(evt) {
-        console.log(evt.checked)
-    }
-
-    function openAccordion(id) {
-        let x = document.getElementById(id);
-        if (x.className.indexOf("w3-show") == -1) {
-            x.className += " w3-show";
-        } else {
-            x.className = x.className.replace(" w3-show", "");
-        }
-    }
-</script>
-
 
 <div class="w3-container w3-cell-row w3-teal">
     <h1>Lisa & Johan</h1>
@@ -36,13 +27,14 @@
     <button onclick="openAccordion('living-room')"
             class="w3-btn w3-block w3-gray w3-left-align w3-round-xlarge w3-text-white">Vardagsrum
     </button>
-    <div id="living-room" class="w3-container w3-hide">
-        <div class="w3-cell-row w3-margin">
-            <div class="w3-cell w3-cell-middle">TV-belysning</div>
-            <div class="w3-cell w3-cell-middle">
+    <div id="living-room" class="w3-hide">
 
-                <label class="switch-light switch-candy">
-                    <input type="checkbox" onchange="switcher(this)">
+        <div class="w3-cell-row w3-margin-top w3-padding w3-bottombar w3-border-teal">
+            <div class="w3-cell w3-cell-middle">TV-belysning</div>
+            <div class="w3-cell w3-cell-middle w3-center">
+
+                <label class="switch-light switch-candy w3-margin-bottom">
+                    <input type="checkbox" onchange="onTvBackgroundStateSwitch(this)" {{if .tv_background_light.State}} checked {{end}}>
                     <span>
                         <span>Off</span>
                         <span>On</span>
@@ -50,11 +42,20 @@
                       </span>
                 </label>
 
+                <select class="w3-select w3-border" name="option" onchange="onTvBackgroundModeChange(this.value)">
+                    <option value="0" {{if eq .tv_background_light.Mode 0}} selected {{end}}>Standard</option>
+                    <option value="1" {{if eq .tv_background_light.Mode 1}} selected {{end}}>Cirkel</option>
+                    <option value="2" {{if eq .tv_background_light.Mode 2}} selected {{end}}>Blinkning</option>
+                    <option value="3" {{if eq .tv_background_light.Mode 3}} selected {{end}}>Motsatt håll</option>
+                    <option value="4" {{if eq .tv_background_light.Mode 4}} selected {{end}}>Jaga svans</option>
+                    <option value="5" {{if eq .tv_background_light.Mode 5}} selected {{end}}>Kram</option>
+                </select>
             </div>
         </div>
+
+
     </div>
 </div>
-
 </body>
 
 </html>
