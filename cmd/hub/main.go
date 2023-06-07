@@ -38,7 +38,8 @@ func handleRoot(w http.ResponseWriter, req *http.Request) {
 }
 
 func registerTvBackgroundLightRouter(prefix string) {
-	router := &TvBackgroundLightRouter{am.tvBackgroundLight}
+	router := &TvBackgroundLightRouter{am.tvBackgroundLightClient}
 	http.HandleFunc(prefix+"/state", router.HandleState)
 	http.HandleFunc(prefix+"/mode", router.HandleMode)
+	http.HandleFunc(prefix+"/speed", router.HandleSpeed)
 }

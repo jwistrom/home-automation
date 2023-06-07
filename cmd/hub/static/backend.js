@@ -12,3 +12,11 @@ function onTvBackgroundModeChange(mode) {
         }
     })
 }
+
+function onTvBackgroundSpeedChange(speed) {
+    axios.put("tvbackgroundlight/speed", {}, {
+        params: {
+            speed: speed
+        }
+    })
+}

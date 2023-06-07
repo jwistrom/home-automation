@@ -1,12 +1,17 @@
-package accessories
+package types
 
-import (
-	"fmt"
+import "fmt"
+
+type TvBackgroundLightMode int
+
+const (
+	Standard TvBackgroundLightMode = iota
+	Circle
+	Blink
+	Opposite
+	ChaseTail
+	Hug
 )
-
-type Accessory interface {
-	getId() string
-}
 
 type SwitchState bool
 
@@ -24,3 +29,9 @@ const (
 	On  SwitchState = true
 	Off SwitchState = false
 )
+
+type Status struct {
+	State SwitchState
+	Mode  TvBackgroundLightMode
+	Speed int
+}
