@@ -9,6 +9,7 @@ type Hardware struct {
 	state types.SwitchState
 	mode  types.TvBackgroundLightMode
 	speed int
+	color string
 }
 
 func NewHardware() *Hardware {
@@ -16,6 +17,7 @@ func NewHardware() *Hardware {
 		state: false,
 		mode:  0,
 		speed: 2,
+		color: "FFFF00FF",
 	}
 }
 
@@ -24,6 +26,7 @@ func (hardware *Hardware) GetStatus() types.Status {
 		State: hardware.state,
 		Mode:  hardware.mode,
 		Speed: hardware.speed,
+		Color: hardware.color,
 	}
 }
 
@@ -47,4 +50,9 @@ func (hardware *Hardware) SetMode(mode types.TvBackgroundLightMode) {
 func (hardware *Hardware) SetSpeed(speed int) {
 	log.Printf("Setting speed to %v\n", speed)
 	hardware.speed = speed
+}
+
+func (Hardware *Hardware) SetColor(color string) {
+	log.Printf("Setting color to %s", color)
+	hardware.color = color
 }

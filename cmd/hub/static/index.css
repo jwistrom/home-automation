@@ -1,0 +1,9 @@
+.property-container {
+    margin-bottom: 10px;
+}
+
+.property-container .title {
+    color: grey;
+    text-align: left;
+}
+

@@ -20,3 +20,11 @@ function onTvBackgroundSpeedChange(speed) {
         }
     })
 }
+
+function onTvBackgroundColorChange(color) {
+    axios.put("tvbackgroundlight/color", {}, {
+        params: {
+            color: color.substring(1)
+        }
+    })
+}

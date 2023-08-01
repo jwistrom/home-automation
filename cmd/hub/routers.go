@@ -57,3 +57,16 @@ func (r *TvBackgroundLightRouter) HandleSpeed(w http.ResponseWriter, req *http.R
 		}
 	}
 }
+
+func (r *TvBackgroundLightRouter) HandleColor(w http.ResponseWriter, req *http.Request) {
+	if req.Method == http.MethodPut {
+		params := req.URL.Query()
+		if params.Has("color") {
+			inputColor := params.Get("color")
+
+			r.tvBackgroundLightClient.SetColor(inputColor)
+			log.Printf("Setting new Tv background light speed to %s\n", inputColor)
+			_, _ = w.Write([]byte(fmt.Sprintf("%s", inputColor)))
+		}
+	}
+}

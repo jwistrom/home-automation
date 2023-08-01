@@ -80,6 +80,15 @@ func (client *TvBackgroundLightClient) SetSpeed(speed int) error {
 	return nil
 }
 
+func (client *TvBackgroundLightClient) SetColor(color string) error {
+	_, err := client.doPut(client.baseUrl + "color?color=" + color)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (client *TvBackgroundLightClient) doPut(path string) (string, error) {
 	request, err := http.NewRequest(http.MethodPut, path, nil)
 	if err != nil {

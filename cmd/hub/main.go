@@ -30,16 +30,19 @@ func loadTemplate() {
 }
 
 func handleRoot(w http.ResponseWriter, req *http.Request) {
-	err := htmlTemplate.Execute(w, map[string]interface{}(am.getStatusOfAllAccessories()))
-	if err != nil {
-		log.Printf("Template render error: %s", err)
-		http.Error(w, err.Error(), 500)
+	if req.Method == http.MethodGet {
+		err := htmlTemplate.Execute(w, map[string]interface{}(am.getStatusOfAllAccessories()))
+		if err != nil {
+			log.Printf("Template render error: %s", err)
+			http.Error(w, err.Error(), 500)
+		}
 	}
 }
 
-func registerTvBackgroundLightRouter(prefix string) {
+func registerTvBackgroundLightRouter(pathPrefix string) {
 	router := &TvBackgroundLightRouter{am.tvBackgroundLightClient}
-	http.HandleFunc(prefix+"/state", router.HandleState)
-	http.HandleFunc(prefix+"/mode", router.HandleMode)
-	http.HandleFunc(prefix+"/speed", router.HandleSpeed)
+	http.HandleFunc(pathPrefix+"/state", router.HandleState)
+	http.HandleFunc(pathPrefix+"/mode", router.HandleMode)
+	http.HandleFunc(pathPrefix+"/speed", router.HandleSpeed)
+	http.HandleFunc(pathPrefix+"/color", router.HandleColor)
 }

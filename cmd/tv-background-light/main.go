@@ -19,6 +19,7 @@ func main() {
 	http.HandleFunc("/state", handleState)
 	http.HandleFunc("/mode", handleMode)
 	http.HandleFunc("/speed", handleSpeed)
+	http.HandleFunc("/color", handleColor)
 
 	log.Println("Serving on port 8081")
 	log.Fatal(http.ListenAndServe(":8081", nil))
@@ -82,6 +83,18 @@ func handleSpeed(w http.ResponseWriter, req *http.Request) {
 
 			hardware.SetSpeed(intSpeed)
 			_, _ = w.Write([]byte(fmt.Sprintf("%d", intSpeed)))
+		}
+	}
+}
+
+func handleColor(w http.ResponseWriter, req *http.Request) {
+	if req.Method == http.MethodPut {
+		params := req.URL.Query()
+		if params.Has("color") {
+			inputColor := params.Get("color")
+
+			hardware.SetColor(inputColor)
+			_, _ = w.Write([]byte(fmt.Sprintf("%s", inputColor)))
 		}
 	}
 }

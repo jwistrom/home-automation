@@ -6,3 +6,12 @@ function openAccordion(id) {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+
+function openLivingRoomTab(tab, btn) {
+    let i;
+    let x = document.getElementsByClassName("control-unit");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    document.getElementById(tab).style.display = "block";
+}

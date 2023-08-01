@@ -11,6 +11,7 @@ const (
 	Opposite
 	ChaseTail
 	Hug
+	Explosion
 )
 
 type SwitchState bool
@@ -34,4 +35,5 @@ type Status struct {
 	State SwitchState
 	Mode  TvBackgroundLightMode
 	Speed int
+	Color string
 }
