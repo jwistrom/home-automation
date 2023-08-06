@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jwistrom/home-automation/tv-background/types"
 	"log"
 	"net/http"
 	"strconv"
@@ -63,9 +62,8 @@ func handleMode(w http.ResponseWriter, req *http.Request) {
 				return
 			}
 
-			newMode := types.TvBackgroundLightMode(intMode)
-			hardware.SetMode(newMode)
-			_, _ = w.Write([]byte(fmt.Sprintf("%v", newMode)))
+			hardware.SetMode(intMode)
+			_, _ = w.Write([]byte(fmt.Sprintf("%d", intMode)))
 		}
 	}
 }

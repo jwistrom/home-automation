@@ -62,7 +62,7 @@ func (client *TvBackgroundLightClient) SwitchState() (types.SwitchState, error) 
 
 }
 
-func (client *TvBackgroundLightClient) SetMode(mode types.TvBackgroundLightMode) error {
+func (client *TvBackgroundLightClient) SetMode(mode int) error {
 	_, err := client.doPut(client.baseUrl + "mode?mode=" + strconv.Itoa(int(mode)))
 	if err != nil {
 		return err

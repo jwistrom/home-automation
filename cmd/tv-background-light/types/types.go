@@ -2,18 +2,6 @@ package types
 
 import "fmt"
 
-type TvBackgroundLightMode int
-
-const (
-	Standard TvBackgroundLightMode = iota
-	Circle
-	Blink
-	Opposite
-	ChaseTail
-	Hug
-	Explosion
-)
-
 type SwitchState bool
 
 func (ss SwitchState) Format(f fmt.State, c rune) {
@@ -33,7 +21,7 @@ const (
 
 type Status struct {
 	State SwitchState
-	Mode  TvBackgroundLightMode
+	Mode  int
 	Speed int
 	Color string
 }

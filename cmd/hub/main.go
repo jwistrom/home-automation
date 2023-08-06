@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/magiconair/properties"
 	"html/template"
 	"log"
 	"net/http"
@@ -10,7 +11,8 @@ var htmlTemplate *template.Template
 var am *AccessoriesManager
 
 func main() {
-	am = NewAccessoriesManager()
+	conf := readAccessoriesManagerConfFromFile("application.properties")
+	am = NewAccessoriesManager(conf)
 	loadTemplate()
 
 	http.HandleFunc("/", handleRoot)
@@ -45,4 +47,18 @@ func registerTvBackgroundLightRouter(pathPrefix string) {
 	http.HandleFunc(pathPrefix+"/mode", router.HandleMode)
 	http.HandleFunc(pathPrefix+"/speed", router.HandleSpeed)
 	http.HandleFunc(pathPrefix+"/color", router.HandleColor)
+}
+
+func readAccessoriesManagerConfFromFile(fileName string) (conf accessoriesManagerConf) {
+	props, err := properties.LoadFile(fileName, properties.UTF8)
+	if err != nil {
+		log.Println("Failed to read properties file " + fileName + ". Using fallback")
+		props = properties.NewProperties()
+	} else {
+		log.Println("Read properties file " + fileName)
+	}
+
+	conf.tvBackgroundIp = props.GetString("tv-background-light.ip", "localhost")
+	conf.tvBackgroundPort = props.GetInt("tv-background-light.port", 8081)
+	return
 }

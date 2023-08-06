@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	tvBackground "github.com/jwistrom/home-automation/tv-background/client"
-	tvBackgroundTypes "github.com/jwistrom/home-automation/tv-background/types"
 	"log"
 	"net/http"
 	"strconv"
@@ -32,10 +31,9 @@ func (r *TvBackgroundLightRouter) HandleMode(w http.ResponseWriter, req *http.Re
 				return
 			}
 
-			newMode := tvBackgroundTypes.TvBackgroundLightMode(intMode)
-			r.tvBackgroundLightClient.SetMode(newMode)
-			log.Printf("Setting new Tv background light mode to %d\n", newMode)
-			_, _ = w.Write([]byte(fmt.Sprintf("%v", newMode)))
+			r.tvBackgroundLightClient.SetMode(intMode)
+			log.Printf("Setting new Tv background light mode to %d\n", intMode)
+			_, _ = w.Write([]byte(fmt.Sprintf("%v", intMode)))
 		}
 	}
 }

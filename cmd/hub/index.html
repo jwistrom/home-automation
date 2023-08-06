@@ -11,7 +11,8 @@
 <script src="static/jscolor.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    axios.defaults.baseURL = "http://localhost:8080"
+    console.log("Location: ", window.location.href)
+    axios.defaults.baseURL = window.location.href
 </script>
 <head>
     <meta charset="UTF-8">
